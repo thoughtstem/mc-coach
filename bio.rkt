@@ -13,19 +13,20 @@
 (require 2htdp/image website/raco-tools/preview)
 (require (except-in website/bootstrap frame))
 
-(define (bio #:name name #:profile-pic profile-pic #:coach-story coach-story #:youtube-link youtube-link)
+(define (bio #:name name #:profile-pic (profile-pic (circle 40 'solid 'red)) #:coach-story (coach-story "COACH STORY GOES HERE (use #:coach-story)") #:youtube-link (youtube-link #f))
   (bio-card #:name name
     (row
       (col-2
         (write-img class: "img-fluid rounded mb-3" profile-pic))
       (col-10
         (div coach-story)
-        (div class: "pt-2"
-         (iframe width: "560" height: "315" 
-          src: (~a "https://www.youtube.com/embed/" (extract-youtube-id youtube-link))
-          'frameborder: "0" 
-          'allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-          'allowfullscreen: #t))))))
+        (when youtube-link
+         (div class: "pt-2"
+          (iframe width: "560" height: "315" 
+           src: (~a "https://www.youtube.com/embed/" (extract-youtube-id youtube-link))
+           'frameborder: "0" 
+           'allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+           'allowfullscreen: #t)))))))
 
 (define (extract-youtube-id l)
   (second (string-split l "v=")))
