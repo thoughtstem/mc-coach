@@ -13,7 +13,7 @@
 (require 2htdp/image website/raco-tools/preview)
 (require (except-in website/bootstrap frame))
 
-(define (bio #:name name #:profile-pic (profile-pic (circle 40 'solid 'red)) #:coach-story (coach-story "COACH STORY GOES HERE (use #:coach-story)") #:youtube-link (youtube-link #f))
+(define (bio #:first-name name #:profile-pic (profile-pic (circle 40 'solid 'red)) #:coach-story (coach-story "COACH STORY GOES HERE (use #:coach-story)") #:youtube-link (youtube-link #f))
   (bio-card #:name name
     (row
       (col-2
@@ -33,7 +33,7 @@
 
 (define (bio-card #:name name . content)
   (card
-    (card-header name)
+    (card-header (~a "Coach " name))
     (card-body
       (card-text
         content))))
